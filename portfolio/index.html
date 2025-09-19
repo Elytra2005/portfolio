@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mahmoud el hajj — Portfolio</title>
+	<meta name="description" content="Portfolio of Mahmoud el hajj — Web Developer & Web Application Builder.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+	<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+	<style>
+		:root {
+			--bg: #0b0c0f;
+			--bg-elev: #111319cc;
+			--text: #e6e7ea;
+			--muted: #a9adbb;
+			--brand: #58d1c9; /* teal */
+			--brand-2: #7c5cff;
+			--accent: #ffce4a;
+			--card: #12141acc;
+			--border: #23263480;
+			--shadow: 0 10px 30px rgba(0,0,0,0.35);
+		}
+		* { box-sizing: border-box; }
+		html, body { height: 100%; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; color: var(--text); background: radial-gradient(1200px 800px at 10% -10%, rgba(124,92,255,0.12), transparent 40%), radial-gradient(1000px 700px at 90% 10%, rgba(0,255,225,0.10), transparent 40%), var(--bg); line-height: 1.6; }
+		img { max-width: 100%; display: block; }
+		a { color: inherit; text-decoration: none; }
+		.skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+		.skip-link:focus { position: fixed; left: 16px; top: 16px; width: auto; height: auto; padding: 8px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+
+		/* Header */
+		.site-header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--border); background: color-mix(in lab, var(--bg) 85%, transparent); backdrop-filter: blur(8px); }
+		.logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; }
+		.logo-mark { width: 28px; height: 28px; display: inline-grid; place-items: center; border-radius: 6px; color: #0a0b0e; background: linear-gradient(135deg, var(--brand), var(--brand-2)); font-weight: 900; }
+		.logo span:last-child { opacity: .85; }
+		.site-nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; align-items: center; }
+		.site-nav a { padding: 8px 10px; color: var(--muted); }
+		.site-nav a:hover, .site-nav a:focus { color: var(--text); }
+		.site-nav .resume { color: #081018; background: linear-gradient(135deg, var(--brand), var(--brand-2)); padding: 8px 14px; border-radius: 999px; }
+		.nav-toggle { display: none; background: none; border: 0; padding: 8px; }
+		.nav-line { width: 22px; height: 2px; background: var(--text); display: block; margin: 4px 0; border-radius: 2px; }
+
+		main { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+		.section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+		.section-head { display: grid; gap: 8px; margin-bottom: 28px; text-align: center; }
+		.section-head h2 { font-size: 36px; margin: 0; }
+		.section-head p { margin: 0; color: var(--muted); }
+
+		/* Hero (two-column) */
+		.hero { padding: 56px 0 36px; }
+		.hero-grid { display: grid; grid-template-columns: 1.4fr .9fr; gap: 28px; align-items: center; }
+		.kicker { color: #6aa3ff; font-weight: 700; margin-bottom: 8px; }
+		.hero-name { font-size: clamp(42px, 7vw, 72px); line-height: 1.05; margin: 0 0 10px 0; font-weight: 900; letter-spacing: .02em; }
+		.hero-lines { display: grid; gap: 16px; margin: 22px 0 26px; }
+		.hero-line { display: flex; gap: 12px; align-items: baseline; font-size: clamp(18px, 3.2vw, 26px); }
+		.hero-line .prefix { opacity: .7; }
+		.hero-line .word-1 { color: #ffd54a; }
+		.hero-line .word-2 { color: #48e1a3; }
+		.hero-line .word-3 { color: #b388ff; }
+		.hero-actions { display: flex; gap: 12px; align-items: center; }
+		.social { display: flex; gap: 12px; list-style: none; padding: 0; margin: 18px 0 0 0; }
+		.social a { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 999px; background: var(--bg-elev); border: 1px solid var(--border); color: var(--text); }
+		/* Profile */
+		.profile { position: relative; width: min(340px, 70vw); aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; margin: 0 auto; border: 8px solid rgba(124,92,255,0.15); box-shadow: 0 0 0 14px rgba(124,92,255,0.06), 0 0 140px rgba(124,92,255,0.25) inset; }
+		.profile img { width: 100%; height: 100%; object-fit: cover; }
+
+		/* Skills cards */
+		.skills-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+		.skill-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 16px; padding: 22px; text-align: center; box-shadow: var(--shadow); backdrop-filter: blur(8px); display: grid; gap: 10px; align-content: center; }
+		.skill-icon { font-size: 34px; }
+		.skill-name { margin: 0; font-weight: 600; }
+
+		/* Experience & Education cards */
+		.timeline { display: grid; gap: 18px; max-width: 900px; margin: 0 auto; }
+		.entry { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 18px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); }
+		.entry-badge { width: 56px; height: 56px; border-radius: 999px; display: grid; place-items: center; font-weight: 800; color: #0a0b0e; background: #ff6a00; }
+		.entry h3 { margin: 0 0 4px 0; }
+		.entry p { margin: 0; color: var(--muted); }
+		.entry .dates { color: var(--muted); }
+
+		/* Misc existing styles kept for sections below */
+		.button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+		.button:hover, .button:focus-visible { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+		.button.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #081018; border: none; }
+		.button.ghost { background: transparent; }
+
+		/* Reveal */
+		.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+		.reveal.visible { opacity: 1; transform: none; }
+
+		/* Responsive */
+		@media (max-width: 1080px) { .skills-grid { grid-template-columns: repeat(3, 1fr); } }
+		@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+		@media (max-width: 720px) {
+			.site-nav ul { position: absolute; right: 20px; top: 58px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px; padding: 10px; display: none; flex-direction: column; gap: 6px; min-width: 200px; backdrop-filter: blur(10px); }
+			.site-nav ul.open { display: flex; }
+			.nav-toggle { display: inline-block; }
+			.site-nav a { padding: 8px 12px; }
+			.hero-name { font-size: clamp(36px, 10vw, 56px); }
+		}
+	</style>
+</head>
+<body>
+	<a href="#home" class="skip-link">Skip to content</a>
+	<div class="loader" aria-hidden="true"><div class="blob"></div></div>
+	<header class="site-header" data-nav>
+		<a class="logo" href="#home" aria-label="Go to home">
+			<span class="logo-mark">λ</span>
+			<span>Mahmoud</span>
+		</a>
+		<nav class="site-nav" aria-label="Primary">
+			<button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle menu">
+				<span class="nav-line"></span>
+				<span class="nav-line"></span>
+				<span class="nav-line"></span>
+			</button>
+			<ul id="nav-list">
+				<li><a href="#skills">Skills</a></li>
+				<li><a href="#experience">Experience</a></li>
+				<li><a href="#education">Education</a></li>
+				<li><a class="resume" href="assets/cv/Mahmoud-El-Hajj-CV.docx" download>Resume</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main id="home">
+		<section class="hero" aria-label="Introduction">
+			<div class="hero-grid">
+				<div>
+					<div class="kicker">Hello, I'm</div>
+					<h1 class="hero-name">MAHMOUD EL HAJJ</h1>
+					<div class="hero-lines" aria-label="Roles">
+						<div class="hero-line"><span class="prefix">A</span> <span class="word-1">Student</span></div>
+						<div class="hero-line"><span class="prefix">A</span> <span class="word-2">Developer</span></div>
+						<div class="hero-line"><span class="prefix">A</span> <span class="word-3">Human</span></div>
+					</div>
+					<div class="hero-actions">
+						<a href="#skills" class="button primary">Explore skills</a>
+						<a href="https://docs.google.com/document/d/e/2PACX-1vRofCS-RY4xmMyqjftql3OooSP3q86qP5ZGiwqQ0s3hh7h-WL4cu8kz-wYOuS0YHaeNS-gnnU0VOY36/pub" class="button ghost" download>Portfolio</a>
+					</div>
+					<ul class="social" aria-label="Social links">
+						<li><a href="https://github.com/Elytra2005" aria-label="GitHub">🐙</a></li>
+						<li><a href="https://www.linkedin.com/in/mahmoud-el-hajj-078807325/" aria-label="LinkedIn">in</a></li>
+					</ul>
+				</div>
+				<div>
+					<div class="profile" aria-hidden="true">
+						<img src="assets/images/86180377.jpg" alt="Profile image placeholder">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="skills" class="section" aria-labelledby="skills-title">
+			<div class="section-head">
+				<h2 id="skills-title">Skills</h2>
+				<p>Technologies I work with</p>
+			</div>
+			<div class="skills-grid">
+				<div class="skill-card reveal"><div class="skill-icon">🟨</div><p class="skill-name">JavaScript</p></div>
+				<div class="skill-card reveal"><div class="skill-icon">⚛️</div><p class="skill-name">React / Next.js</p></div>
+				<div class="skill-card reveal"><div class="skill-icon">🧩</div><p class="skill-name">HTML / CSS</p></div>
+				<div class="skill-card reveal"><div class="skill-icon">🔧</div><p class="skill-name">Node & APIs</p></div>
+				<div class="skill-card reveal"><div class="skill-icon">🔌</div><p class="skill-name">WordPress</p></div>
+				<div class="skill-card reveal"><div class="skill-icon">☁️</div><p class="skill-name">Cloud & CI/CD</p></div>
+			</div>
+		</section>
+
+		<section id="experience" class="section" aria-labelledby="exp-title">
+			<div class="section-head">
+				<h2 id="exp-title">Experience</h2>
+				<p>Recent roles and collaborations</p>
+			</div>
+			<div class="timeline">
+				<article class="entry reveal">
+					<div class="entry-badge" style="background:#22c1c3;">AT</div>
+					<div>
+						<h3>Web Developer & Marketing Manager | Americans Tax</h3>
+						
+						<p>Custom themes/plugins, SEO, and site performance.</p>
+					</div>
+					<div class="dates">2023 — 2025</div>
+				</article>
+				<article class="entry reveal">
+					<div class="entry-badge" style="background:#ff9f1c;">HB</div>
+					<div>
+						<h3>Handle Our Books | Web Developer</h3>
+						<p>Custom themes/plugins, SEO, and site performance.</p>
+					</div>
+					<div class="dates">2024 — 2025</div>
+				</article>
+
+				<article class="entry reveal">
+					<div class="entry-badge" style="background:#22c1c3;">AD</div>
+					<div>
+						<h3>Aluminum Depot | Software Developer & Co Founder</h3>
+						<p>Built one of biggest proxy & gaming sites in richmond virginia</p>
+					</div>
+					<div class="dates">2023 - 2024</div>
+				</article>
+
+				<article class="entry reveal">
+					<div class="entry-badge" style="background:#ff9f1c;">SS</div>
+					<div>
+						<h3>Shopiverse Web Design Agency | Co Founder</h3>
+						<p>Custom ecommerce dropshipping websites built for you</p>
+					</div>
+					<div class="dates">2023 — 2023</div>
+				</article>
+			</div>
+		</section>
+
+		<section id="education" class="section" aria-labelledby="edu-title">
+			<div class="section-head">
+				<h2 id="edu-title">Education</h2>
+				<p>My educational background</p>
+			</div>
+			<div class="timeline">
+				<article class="entry reveal">
+					<div class="entry-badge" style="background:#ff6a00;">U</div>
+					<div>
+						<h3>Bachelor of Science in Computer Science</h3>
+						<p>Virginia Commonwealth University</p>
+					</div>
+					<div class="dates">2025 - 2027</div>
+				</article>
+				<article class="entry reveal">
+					<div class="entry-badge" style="background:#4cc9f0;">IT</div>
+					<div>
+						<h3>Associate of Science in Computer Science</h3>
+						<p>Reynolds Community college/p>
+					</div>
+					<div class="dates">2023 — 2025</div>
+				</article>
+
+
+				<article class="entry reveal">
+					<div class="entry-badge" style="background:#4cc9f0;">IT</div>
+					<div>
+						<h3>Ace center of technology | Web Development</h3>
+						<p>Ace technical center</p>
+					</div>
+					<div class="dates">2021 — 2022</div>
+				</article>
+			</div>
+		</section>
+
+	</main>
+
+	<script>
+		(function() {
+			const root = document.documentElement;
+			window.addEventListener('load', () => { const loader = document.querySelector('.loader'); if (loader) loader.classList.add('hidden'); });
+			const navToggle = document.querySelector('.nav-toggle');
+			const navList = document.getElementById('nav-list');
+			if (navToggle && navList) {
+				navToggle.addEventListener('click', () => { const isOpen = navList.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(isOpen)); });
+				navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navList.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); }));
+			}
+			const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+			const revealer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealer.unobserve(entry.target); } }); }, { threshold: 0.12 });
+			document.querySelectorAll('.section, .entry, .skill-card').forEach(el => { el.classList.add('reveal'); revealer.observe(el); });
+			// Simple form validation remain
+			const form = document.querySelector('.contact-form');
+			function setError(input, message) { const error = input.parentElement.querySelector('.field-error') || input.nextElementSibling; if (error) error.textContent = message || ''; input.setAttribute('aria-invalid', message ? 'true' : 'false'); }
+			function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+			if (form) form.addEventListener('submit', (ev) => { ev.preventDefault(); const name = form.querySelector('input[name="name"]'); const email = form.querySelector('input[name="email"]'); const message = form.querySelector('textarea[name="message"]'); let valid = true; if (!name.value.trim()) { setError(name, 'Please enter your name.'); valid = false; } else setError(name, ''); if (!isEmail(email.value)) { setError(email, 'Enter a valid email.'); valid = false; } else setError(email, ''); if (message.value.trim().length < 10) { setError(message, 'Please provide a few details.'); valid = false; } else setError(message, ''); if (valid) { const subject = encodeURIComponent('New Project Inquiry'); const body = encodeURIComponent(`Name: ${name.value}\nEmail: ${email.value}\n\n${message.value}`); window.location.href = `mailto:hello@mahmoudelhajj.dev?subject=${subject}&body=${body}`; } });
+		})();
+	</script>
+</body>
+</html>
